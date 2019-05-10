@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NodeJS MongoDB CRUD Done</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark bg-dark mb-4">
+      <a class="navbar-brand" href="#">NodeJS MongoDB CRUD Done</a>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-header text-center">
+              <h4 id="h4">Action Form</h4>
+            </div>
+            <div class="card-body">
+              <form action="/add" method="post">
+                <div class="form-group">
+                  <label for="title">Title</label>
+                  <input class="form-control" type="text" name="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea class="form-control" name="description" cols="80" placeholder="Description"></textarea>
+                </div>
+                <button class="btn btn-primary btn-block" type="submit"> Add </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="col-md-7">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Operations</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% for(var i=0; i < task.length; i++) { %>
+                <tr>
+                  <td><%= i + 1%></td>
+                  <td><strong><%= task[i].title %></strong></td>
+                  <td><%= task[i].description %></td>
+                  <td>
+                    <a
+                      class="<%= task[i].status ? 'btn btn-success ml-2' : 'btn btn-dark ml-2' %>"
+                      href="/status/<%= task[i]._id %>"
+                    >
+                      Done
+                    </a>
+                    <a href="/edit/<%= task[i]._id %>" class="btn btn-warning ml-3">Edit</a>
+                    <a href="/delete/<%= task[i]._id %>" class="btn btn-danger ml-3">Delete</a>
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
